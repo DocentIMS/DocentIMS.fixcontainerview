@@ -1,0 +1,49 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="docentims.fixcontainerview">
+
+  <i18n:registerTranslations directory="locales" />
+
+  <includeDependencies package="." />
+
+  <include package=".browser" />
+
+
+  <genericsetup:registerProfile
+      name="default"
+      title="docentims.fixcontainerview"
+      directory="profiles/default"
+      description="Installs the docentims.fixcontainerview add-on."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+  <genericsetup:importStep
+      name="docentims.fixcontainerview-postInstall"
+      title="docentims.fixcontainerview post_install import step"
+      description="Post install import step from docentims.fixcontainerview"
+      handler=".setuphandlers.post_install">
+  </genericsetup:importStep>
+
+  <genericsetup:registerProfile
+      name="uninstall"
+      title="docentims.fixcontainerview"
+      directory="profiles/uninstall"
+      description="Uninstalls the docentims.fixcontainerview add-on."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+  <genericsetup:importStep
+      name="docentims.fixcontainerview-uninstall"
+      title="docentims.fixcontainerview uninstall import step"
+      description="Import step run during ininstalling docentims.fixcontainerview"
+      handler=".setuphandlers.uninstall">
+  </genericsetup:importStep>
+
+  <utility
+      factory=".setuphandlers.HiddenProfiles"
+      name="docentims.fixcontainerview-hiddenprofiles" />
+
+</configure>
